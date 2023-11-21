@@ -23,7 +23,7 @@ app.post('/generate-pdf', async (req, res) => {
     const dl_url = req.body.dl_url;
 
     if (dl_url) {
-        const browser = await puppeteer.launch({ headless: 'new' });
+        const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox'] });
         const page = await browser.newPage();
 
         await page.goto(dl_url, { waitUntil: 'networkidle0' });
