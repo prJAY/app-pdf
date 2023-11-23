@@ -7,20 +7,29 @@ const port = 8080;
 
 // Use body-parser middleware
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Serve HTML form
 app.get('/', (req, res) => {
     res.send(`
     <form action="/generate-pdf" method="post">
-      <input type="text" name="dl_url" placeholder="Enter URL">
+      <input type="text" name="fwdurl" placeholder="Enter URL">
       <button type="submit">Generate PDF</button>
     </form>
   `);
 });
 
+app.get('/test-get', (req, res) => {
+    res.json({requestBody: req.body})
+});
+
+app.post('/test-post', (req, res) => {
+    res.json({requestBody: req.body})
+});
+
 // Generate PDF route
 app.post('/generate-pdf', async (req, res) => {
-    const dl_url = req.body.dl_url;
+    const dl_url = req.body.fwdurl;
 
     if (dl_url) {
         const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox'] });
