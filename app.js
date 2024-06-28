@@ -19,10 +19,12 @@ app.get('/', (req, res) => {
   `);
 });
 
+// test route
 app.get('/test-get', (req, res) => {
     res.json({requestBody: req.body})
 });
 
+// test route
 app.post('/test-post', (req, res) => {
     res.json({requestBody: req.body})
 });
